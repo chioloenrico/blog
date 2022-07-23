@@ -1,6 +1,6 @@
 ---
 title: "Ricominciamo - Il primo Post"
-date: 2022-07-23T14:10:03+02:00
+date: 2022-07-23T14:10:03+01:00
 draft: false
 description: "Il primo post che arriva su questo Blog. Il racconto di un nuovo inizio e altre cose interessanti"
 tags: ["Public Journal","Aggiornamenti"]
@@ -51,7 +51,7 @@ Se stai leggendo questo post, significa che in qualche modo hai trovato il mio n
 
 C'è ancora molto da fare, sia chiaro, ma alla fine è un posto dove posso scrivere Markdown, fare il commit su Git e alla fine ottenere una pagina web completa. 
 
-Perché non sono andato sui classiconi tipo Wordpress? Non c'è un motivo preciso, era da tempo che volevo cimentarmi con Ghost e quale migliore occasione del caricarci sopra il mio sito Web. 
+Perché non sono andato sui classiconi tipo Wordpress? Non c'è un motivo preciso, era da tempo che volevo cimentarmi con Hugo e quale migliore occasione del caricarci sopra il mio sito Web. 
 
 > Nota: naturalmente non è la scelta migliore in assoluto, ma volevo giocarci e ci ho perso un'intera giornata 🤓
 
