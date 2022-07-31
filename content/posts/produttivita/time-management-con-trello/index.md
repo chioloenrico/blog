@@ -34,7 +34,7 @@ Non sono un'esperto di produttività, sto solo cercando di spiegarti alla meglio
 
 {{< rawhtml >}}
 
-<div style="width:100%;height:0;padding-bottom:87%;position:relative;"><iframe src="https://giphy.com/embed/1xVajldle6CVKnZYp0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/HallmarkChannel-wcth5007-1xVajldle6CVKnZYp0">via GIPHY</a></p>
+<div style="width:100%;height:0;padding-bottom:87%;position:relative;"><iframe src="https://giphy.com/embed/1xVajldle6CVKnZYp0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/HallmarkChannel-wcth5007-1xVajldle6CVKnZYp0"></a></p>
 
 {{< /rawhtml >}}
 
@@ -62,7 +62,7 @@ Qui sotto, puoi vedere lo screen di una mia board personale.
 
 ![Una delle mie board trello organizzate](img/board-trello-min.png)
 
-## 🥷🏻 Come processo i miei tag
+## 🥷🏻 Come processo i miei task
 Tutto bellissimo fin qui, ma come avrai intuito, la segmentazione delle liste lascia il tempo che trova senza un buon modo per processare i vari task. 
 
 Quindi? Come processo i vari task? 
