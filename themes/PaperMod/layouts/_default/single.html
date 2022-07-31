@@ -36,25 +36,34 @@
   {{- end }}
 
   <footer class="post-footer">
+    <!-- Inizio Categoria -->
+    <ul class="post-category">
+      {{- range ($.GetTerms "categories") }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    <!-- Fine Categoria -->
+
+    <!-- Inizio Tag -->
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
-      <b>Tag: &nbsp </b>
       {{- range ($.GetTerms $tags) }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-    <br>
-    <ul style ="font-size:15px; border-style:dotted; padding: 10px" class="post-tags">
-      <b>Come mi sento:</b>
+    
+    <div class="post-meta-added">
+      <b>🌕 Mood:</b>
       {{- range ($.GetTerms "moods") }}
-      <li style ="font-size:15px"> &nbsp{{ .LinkTitle }} </li>
+      {{ .LinkTitle }}
       {{- end }}
-      <br><b>Scrivo da:</b>
+      <br><b>📍 Scrivo da:</b>
       {{- range ($.GetTerms "place") }}
-      <li style ="font-size:15px"> &nbsp{{ .LinkTitle }} </li> 
+      {{ .LinkTitle }} 
       {{- end }}
-    </ul>
+    </div>
+
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

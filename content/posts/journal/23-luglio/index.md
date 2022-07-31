@@ -3,10 +3,10 @@ title: "Ricominciamo - Il primo Post"
 date: 2022-07-23T14:10:03+01:00
 draft: false
 description: "Il primo post che arriva su questo Blog. Il racconto di un nuovo inizio e altre cose interessanti"
-tags: ["Public Journal","Aggiornamenti"]
+tags: [""]
 moods: ["Stanco"]
 place: "Pietraperzia"
-categories: ["Journal"]
+categories: ["Public Journal"]
 
 ---
 

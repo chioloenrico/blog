@@ -1,4 +1,4 @@
 ---
-title: "Come sono stato?"
+title: "Ho scritto con questo stato d'animo"
 layout: "terms"
 ---

@@ -316,7 +316,35 @@
     color: var(--secondary);
     font-size: 14px;
     line-height: 34px;
+    background: #FFE161;
+}
+
+.post-category li{
+    display: inline-block;
+    margin-inline-end: 3px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+
+}
+
+.post-category a{
+    display: block;
+    padding-inline-start: 14px;
+    padding-inline-end: 14px;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 34px;
     background: var(--code-bg);
+    border-radius: var(--radius);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    background-color: #FF6666;
+    color:aliceblue;
+
+}
+
+.post-meta-added{
+    padding-top:10px;
 }
 
 .post-tags a:hover,
