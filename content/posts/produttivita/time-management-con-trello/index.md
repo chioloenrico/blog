@@ -110,7 +110,7 @@ Qui uno screen di esempio. (PS: ho fatto pena questa settimana di ferie -.- )
 
 Questo grafico fa riferimento alla settimana in corso. Come puoi vedere, ho toppato alla grande il mio sprint, ma va bene così. 
 
-Non mi giudico, [ero in ferie](../../journal/23-luglio/) ed ho sbagliato a segnare così tanti task. 
+Non mi giudico, [ero in ferie](../../journal/23-luglio-22/) ed ho sbagliato a segnare così tanti task. 
 
 Ma va bene, riuscirò a migliorare durante la prossima settimana (che tra parentesi, sarà ancora una settimana di ferie 😍 )
 
