@@ -9,3 +9,12 @@ place: "Pietraperzia"
 categories: ["Public Journal"]
 
 ---
+
+
+## 📖 Cosa sto leggendo
+
+## 🎶 Che cosa ho ascoltato?
+
+## 🍿 Cosa ho visto?
+
+## 🧑‍💻 Contenuti Interessanti
