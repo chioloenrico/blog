@@ -7,5 +7,6 @@ tags: [""]
 moods: ["Un pò più riposato"]
 place: "Pietraperzia"
 categories: ["Public Journal"]
+books: "The Minimalist Entrepreneur"
 
 ---

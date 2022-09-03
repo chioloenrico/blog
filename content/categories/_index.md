@@ -1,4 +1,5 @@
 ---
-title: "Category"
+title: "Categorie"
 layout: "terms"
 ---
+
