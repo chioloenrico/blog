@@ -1,7 +1,7 @@
 ---
 title: "Induzione, deduzione, metodo scientifico e lettura dei dati"
 date: 2022-09-17T18:13:00+01:00
-draft: true
+draft: false
 description: "Stavo riflettendo sulle implicazioni di utilizzare il metodo induttivo o deduttivo per la lettura dei dati"
 tags: ["Filosofia","Logica","Interpretazione dei dati"]
 moods: ["Stanco"]
