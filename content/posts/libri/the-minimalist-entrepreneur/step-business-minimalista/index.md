@@ -3,10 +3,12 @@ title: "📚 1. Gli step per la creazione di un business minimalista"
 date: 2022-09-01T18:13:00+01:00
 draft: false
 description: "Che cosa vuol dire essere un imprenditore minimalista? Ne ho parlato in questo post attraverso gli appunti da Minimalist Entrepreneur"
-tags: [""]
+tags: ["Business","Minimalismo"]
 moods: ["Week-end"]
 place: "Pietraperzia"
 books: "The Minimalist Entrepreneur"
+categories: ["Note dai Libri"]
+
 
 ---
 ![](img/The%20Minimalist%20Entrepreneur.png)
