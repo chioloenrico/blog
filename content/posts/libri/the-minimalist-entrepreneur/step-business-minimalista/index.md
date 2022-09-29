@@ -177,7 +177,7 @@ Sicuramente, tornerò a scrivere del libro nei prossimi giorni, magari dopo un d
 Se hai già letto il libro, mi piacerebbe conoscere le tue impressioni. Al solito, ti invito a scrivermi direttamente, in modo che possiamo scambiarci idee e contaminazioni. 
 
 Un abbraccio e ci vediamo nel prossimo post.
- 
+
 {{< rawhtml >}}
 <script>
   dataLayer.push({
@@ -187,5 +187,17 @@ Un abbraccio e ci vediamo nel prossimo post.
     'tag':["Business","Minimalismo"],
     'libro':'The Minimalist Entrepreneur'
   })
+
+      setTimeout(lettura, 50000)
+
+    function lettura(){
+      dataLayer.push({
+        'event':'Lettura 50s',
+        'Titolo':'📚 1. Gli step per la creazione di un business minimalista',
+        'categoria':'Note dai Libri',
+        'tag':["Business","Minimalismo"],
+        'libro':'The Minimalist Entrepreneur'
+    })
+  }
 </script>
 {{< /rawhtml >}}

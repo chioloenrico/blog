@@ -88,6 +88,18 @@ Per oggi direi che è tutto. Sono le 18.43 quindi direi che la mia giornata fini
     'tag':'',
     'libro':''
   })
+
+        setTimeout(lettura, 50000)
+
+    function lettura(){
+      dataLayer.push({
+        'event':'Lettura 50s',
+        'Titolo':'📚 1. Gli step per la creazione di un business minimalista',
+        'categoria':'Note dai Libri',
+        'tag':["Business","Minimalismo"],
+        'libro':'The Minimalist Entrepreneur'
+    })
+  }
 </script>
 {{< /rawhtml >}}
 

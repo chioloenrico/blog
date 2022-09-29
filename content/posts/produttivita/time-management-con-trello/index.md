@@ -150,5 +150,19 @@ Procedo comunque a scrivere un aggiornamento tra qualche settimana. ❤️
     'tag':["Trello","Time Management","Tool"],
     'libro':''
   })
+
+    setTimeout(lettura, 50000)
+
+    function lettura(){
+      dataLayer.push({
+        'event':'Lettura 50s',
+        'Titolo':'Come gestisco il mio Workflow con Trello',
+        'categoria':'Produttività',
+        'tag':["Trello","Time Management","Tool"],
+        'libro':''
+  })
+  }
 </script>
+
+
 {{< /rawhtml >}}
