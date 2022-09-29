@@ -11,6 +11,9 @@ categories: ["Note dai Libri"]
 
 
 ---
+
+
+
 ![](img/The%20Minimalist%20Entrepreneur.png)
 
 😊 Benvenuto. Sono davvero felice di poter scrivere questo primo post dando finalmente un senso alla tassonomia "Libri". 
@@ -173,4 +176,16 @@ Sicuramente, tornerò a scrivere del libro nei prossimi giorni, magari dopo un d
 
 Se hai già letto il libro, mi piacerebbe conoscere le tue impressioni. Al solito, ti invito a scrivermi direttamente, in modo che possiamo scambiarci idee e contaminazioni. 
 
-Un abbraccio e ci vediamo nel prossimo post. 
+Un abbraccio e ci vediamo nel prossimo post.
+ 
+{{< rawhtml >}}
+<script>
+  dataLayer.push({
+    'event':'Lettura Blog Post',
+    'Titolo':'📚 1. Gli step per la creazione di un business minimalista',
+    'categoria':'Note dai Libri',
+    'tag':["Business","Minimalismo"],
+    'libro':'The Minimalist Entrepreneur'
+  })
+</script>
+{{< /rawhtml >}}

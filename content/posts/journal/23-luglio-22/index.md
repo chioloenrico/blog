@@ -10,6 +10,9 @@ categories: ["Public Journal"]
 
 ---
 
+
+
+
 Sono felice, ma anche molto, molto stanco. Non credo di essermi mai veramente fermato negli ultimi 3 anni.
 
 Sembra stupido, lo so, ma non ne sono pentito. Mi sono divertito e sono cresciuto un sacco. Ma arriva anche un momento in cui è necessario fermarsi, guardarsi indietro, fare un piccolo bilancio e quindi ripartire. 
@@ -76,6 +79,16 @@ Per oggi direi che è tutto. Sono le 18.43 quindi direi che la mia giornata fini
 
 
 
-
+{{< rawhtml >}}
+<script>
+  dataLayer.push({
+    'event':'Lettura Blog Post',
+    'Titolo':'Ricominciamo - Il primo Post',
+    'categoria':'Public Journal',
+    'tag':'',
+    'libro':''
+  })
+</script>
+{{< /rawhtml >}}
 
 

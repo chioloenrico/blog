@@ -10,6 +10,9 @@ categories: ["Digital Analytics"]
 books: ""
 
 ---
+
+
+
 ![Statua che pensa](statua-che-pensa.jpeg)
 
 Oggi è Sabato, ma nonostante questo stavo finendo di ultimare le slide per il Webinar che terrò con Siteground Martedì 20 Settembre. PS: se non ti sei ancora iscritto, hai tempo per farlo ed anche se non potrai partecipare direttamente, la registrazione ti verrà inviata. 
@@ -94,3 +97,19 @@ In questo caso, il processo di analisi è attivo, coinvolge una grossa parte ope
 Lo so' il ragionamento andrebbe forse esplorato ancora un poco, tuttavia, spero che possa essere almeno uno spunto di riflessione per il futuro. 
 
 Nel frattempo mi auguro che stiate passando un buon week-end. Io torno a lavorare sulle mie slide. 
+
+
+{{< rawhtml >}}
+
+<script>
+  dataLayer.push({
+    'event':'Lettura Blog Post',
+    'Titolo':'Induzione, deduzione, metodo scientifico e lettura dei dati',
+    'categoria':'Digital Analytics',
+    'tag':'Filosofia, Logica, Interpretazione dei dati',
+    'libro':'',
+    'data':'17 Settembre'
+  })
+</script>
+
+{{< /rawhtml >}}

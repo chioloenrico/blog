@@ -10,6 +10,7 @@ categories: ["Produttività"]
 
 ---
 
+
 ![Immagine di una persona che lavora con Trello al PC](img/trello-copertina-min.jpg)
 
 Ho sempre trovato [Trello](https://trello.com/) un pò fastidioso, lo ammetto. 
@@ -138,3 +139,16 @@ Ci sarebbero ancora un paio di precisazioni da fare, tuttavia, credo che estende
 Come vedi, non si tratta di un metodo molto elaborato di gestione dei task, e dopo due settimane di utilizzo, posso assicurarti che sembra funzionare bene (almeno per me). 
 
 Procedo comunque a scrivere un aggiornamento tra qualche settimana. ❤️
+
+
+{{< rawhtml >}}
+<script>
+  dataLayer.push({
+    'event':'Lettura Blog Post',
+    'Titolo':'Come gestisco il mio Workflow con Trello',
+    'categoria':'Produttività',
+    'tag':["Trello","Time Management","Tool"],
+    'libro':''
+  })
+</script>
+{{< /rawhtml >}}

@@ -10,6 +10,7 @@ categories: ["Public Journal"]
 
 ---
 
+
 La prima settimana (abbondante) di [ferie](../23-luglio-22/) (che fa tanto medioevo chiamarle così, perciò tornerò a chiamarle vacanze) è andata ed io non ho rispettato tutti i miei buoni propositi. 
 
 Lo ammetto, ho lavoricchiato qua' e la e in particolare ieri ho passato quasi tutto il giorno alla scrivania.
@@ -67,7 +68,18 @@ Tanta musica, al solito tanto indie, ma questo è un elenco non esaustivo degli 
 ## 🍿 Cosa ho visto?
 Sto facendo un rewatch di **Ted Lasso**, l'ho ricominciato giusto ieri sera insieme alla mia ragazza e continuerò a guardarlo questa settimana. Una serie che è un elogio alla gentilezza e credo uno dei migliori prodotti di Apple in ambito televisivo. (lo affermo con la supponenza di chi non ne capisce un cazzo eh!)
 
-
+{{< rawhtml >}}
+<script>
+  dataLayer.push({
+    'event':'Lettura Blog Post',
+    'Titolo':'Recap della prima settimana',
+    'categoria':'Public Journal',
+    'tag':'',
+    'libro':'',
+    'data':'5 Agosto'
+  })
+</script>
+{{< /rawhtml >}}
 
 
 
