@@ -7,6 +7,7 @@ tags: ["Trello","Time Management","Tool"]
 moods: ["Mi godo le vacanze"]
 place: "Pietraperzia"
 categories: ["Produttività"]
+summary: "Il mio workflow con Trello. Nonosatnte sia ormai cambiato credo rimanga del tutto valido. Dagli una letta"
 
 ---
 
@@ -148,8 +149,20 @@ Procedo comunque a scrivere un aggiornamento tra qualche settimana. ❤️
     'Titolo':'Come gestisco il mio Workflow con Trello',
     'categoria':'Produttività',
     'tag':["Trello","Time Management","Tool"],
-    'libro':''
+    'libro':'',
+    'utente': {
+      'nome':'Enrico',
+      'cognome':'Chiolo',
+      'email':'chioloenrico@gmail.com'
+    }
   })
+
+  Titolo
+  categoria
+  utente.nome
+  utente.cognome
+  utente.email
+
 
     setTimeout(lettura, 50000)
 

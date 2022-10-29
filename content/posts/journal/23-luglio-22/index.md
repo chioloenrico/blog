@@ -7,7 +7,7 @@ tags: [""]
 moods: ["Stanco"]
 place: "Pietraperzia"
 categories: ["Public Journal"]
-
+summary: "Questo è il primo post che arriva sul blog. Sono davvero felice di tornare a scrivere un poco"
 ---
 
 
@@ -89,15 +89,16 @@ Per oggi direi che è tutto. Sono le 18.43 quindi direi che la mia giornata fini
     'libro':''
   })
 
-        setTimeout(lettura, 50000)
+    setTimeout(lettura, 50000)
 
     function lettura(){
       dataLayer.push({
         'event':'Lettura 50s',
-        'Titolo':'📚 1. Gli step per la creazione di un business minimalista',
-        'categoria':'Note dai Libri',
-        'tag':["Business","Minimalismo"],
-        'libro':'The Minimalist Entrepreneur'
+        'event':'Lettura Blog Post',
+        'Titolo':'Ricominciamo - Il primo Post',
+        'categoria':'Public Journal',
+         'tag':'',
+        'libro':''
     })
   }
 </script>

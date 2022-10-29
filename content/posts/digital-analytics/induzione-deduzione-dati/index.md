@@ -8,7 +8,7 @@ moods: ["Stanco"]
 place: "Pietraperzia"
 categories: ["Digital Analytics"]
 books: ""
-
+summary: "Una riflessione sul metodo scientifico e l'applicazione di quest'ultimo all'analisi dei dati. Solo una bozza dei miei pensieri"
 ---
 
 

@@ -51,6 +51,7 @@
 .post-content h2 {
     margin: 32px auto 24px;
     font-size: 32px;
+    
 }
 
 .post-content h3 {
@@ -344,7 +345,10 @@
 }
 
 .post-meta-added{
-    padding-top:10px;
+    padding:30px;
+    border: dotted 2px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .post-tags a:hover,

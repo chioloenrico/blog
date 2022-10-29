@@ -1,5 +1,5 @@
 baseURL: "https://blog.enricochiolo.com/"
-languageCode: it
+languageCode: "it"
 theme: "PaperMod"
 title: "Enrico Chiolo"
 
@@ -23,10 +23,10 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Enrico Chiolo
-  description: "Il mio blog personale"
+  title: "Enrico Chiolo 👾"
+  description: "Marketer / Digital Analyst / Coder"
   keywords: [Blog, Enrico Chiolo, Coding, Digital Analytics, Digital Marketing]
-  author: Enrico Chiolo
+  author: "Enrico Chiolo"
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: " 2, January 2006"
@@ -34,7 +34,7 @@ params:
   disableThemeToggle: false
 
   ShowReadingTime: true
-  ShowShareButtons: false
+  ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: false

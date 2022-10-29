@@ -7,7 +7,7 @@ tags: [""]
 moods: ["Sento Caldo"]
 place: "Pietraperzia"
 categories: ["Public Journal"]
-
+summary: "Il riassunto della mia prima settimana di vacanze. Si possono ancora chiamare così?"
 ---
 
 

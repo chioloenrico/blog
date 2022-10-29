@@ -62,6 +62,9 @@
       {{- range ($.GetTerms "place") }}
       {{ .LinkTitle }} 
       {{- end }}
+      {{- range ($.GetTerms "books") }}
+      <br><b>📖 Book:</b> <a href="{{ .Permalink }}" style="color: #F66666 ;">{{ .LinkTitle }}</a>
+      {{- end }}
     </div>
 
     {{- if (.Param "ShowPostNavLinks") }}
