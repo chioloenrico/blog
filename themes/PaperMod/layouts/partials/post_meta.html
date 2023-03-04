@@ -22,15 +22,20 @@
 {{- delimit . "&nbsp;·&nbsp;" -}}
 {{- end -}}
 
-    <!-- Inizio Categoria -->
-    <div class="home-category"></div>
-        {{- range ($.GetTerms "categories") }}
-        <b> ▶️ Categoria:</b> {{ .LinkTitle }}
-        {{- end }}
-        
-        {{- range ($.GetTerms "books") }}
-        <br><b> ▶️ Libro:</b> {{ .LinkTitle }}
-        {{- end }}
-    </div>
+<!-- Visualizzazione Attributi Aggiuntivi -->
+<div class="home-category">
+    {{ if $.GetTerms "categories" }}
+    {{ range ($.GetTerms "categories") }}
+    <b> ▶️ Categoria:</b> {{ .LinkTitle }}
+    {{ end }}
+    {{ end }}
+  
+    {{ if $.GetTerms "books" }}
+    {{ range ($.GetTerms "books") }}
+    <br><b> ▶️ Libro:</b> {{ .LinkTitle }}
+    {{ end }}
+    {{ end }}
+  </div>
+  
 
 
