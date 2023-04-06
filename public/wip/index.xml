@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Work In Public on Enrico Chiolo</title>
+    <link>https://blog.enricochiolo.com/wip/</link>
+    <description>Recent content in Work In Public on Enrico Chiolo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it</language>
+    <lastBuildDate>Tue, 04 Apr 2023 11:30:03 +0000</lastBuildDate><atom:link href="https://blog.enricochiolo.com/wip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Controllo CAPI con GTM Server Side (Stape.io)</title>
+      <link>https://blog.enricochiolo.com/wip/controllo-capi-gtm-server-side/</link>
+      <pubDate>Tue, 04 Apr 2023 11:30:03 +0000</pubDate>
+      
+      <guid>https://blog.enricochiolo.com/wip/controllo-capi-gtm-server-side/</guid>
+      <description>Qualche giorno fa ho fatto un controllo ad un implementazione delle CAPI. Ho messo un piccolo riassunto della lavorazione direttamente qui</description>
+      <content:encoded><![CDATA[<h1 id="controllo-capi-con-gtm-server-side">Controllo CAPI con GTM Server Side</h1>
+<p>In questi giorni ho lavorato insieme ad alcuni colleghi/e ad un setting per l&rsquo;implementazione delle CAPI tramite GTM server side. </p>
+<p>Non mi sono occupato direttamente dell&rsquo;implementazione, per cui oggi dovrò verificare che tutti gli eventi siano stati correttamente settati. </p>
+<p>Vorrei portarti con me in questo semplice check per mostrarvi cosa guardo solitamente, come lo guardo e come valuto il setting di un container SS.</p>
+<h2 id="partiamo-da-events-manager">Partiamo da “Events Manager”</h2>
+<p>Per prima cosa, partiamo subito da &ldquo;Events Manager&rdquo; di Facebook per verificare quali eventi sono stati catturati dal pixel, i punteggi di qualità e i valori relativi alla deduplicazione degli eventi.
+<img loading="lazy" src="index/5gxsPmXYZ4kA3lC9bJ6nj_8QA3aadfn0ckvrEg7DVxQwOTumdzvuXwkMWDEFwYxEwuw1deDShEpBW2e45Ez2aBR8u5nC8wEzFQh0MxrNK4ZwAmvmcUPa27f8ykL7Syppw8p5iWyyomj0SkkdvHnEB5k.png" alt=""  />
+
+Restringo il range temporale ai soli eventi avvenuti oggi per evitare di avere dati falsati o test non validi. Una volta fatto ciò, posso procedere a controllare ogni singolo evento, iniziando dal pageview. 
+Ma cosa devo esattamente controllare?</p>
+<h3 id="la-discrepanza-tra-gli-eventi-browser-e-gli-eventi-server">La discrepanza tra gli eventi browser e gli eventi server</h3>
+<p><img loading="lazy" src="index/ArHXndP8MUamhY88F1MqaUAngsOMhBLYvB8mM42fQlT91Nf4Qtacy3Ay6GUJSlC0LMNfIdmtBXNLt9Qd5woYUYqCUWPdriMw8Q1dltdpPno6pM7EvZBZnJbOi0e3QEnOIphL1vbGhKycFE3cMwSNqOo.png" alt=""  />
+
+Nei casi migliori, mi aspetto una corrispondenza 1:1 tra la linea blu (che rappresenta gli eventi del browser) e la linea verde (che indica gli eventi del server). </p>
+<p>In questo caso, noto che sono stati registrati più eventi del browser rispetto a quelli del server. </p>
+<p>Sicuramente è una cosa da controllare, ma lo valuterò nei test successivi. Per ora, cliccando su &ldquo;Visualizza Dettagli&rdquo;, procedo con altri test.
+<img loading="lazy" src="index/TcINhOnTbXMJF_vZCsGom_3BAdHX_kLeB6uCH_rwFcJF5syVUbw8t0YMTanRlsxLAIicuVbTcZVDxRL8vNH5wnrc4xC5nI9Zb1u2mhKGNT79VYQJXCW4q5mf6pHCaH_fXSZtWdWZxognEK8fpAoKUiE.png" alt=""  />
+
+Osservando gli altri eventi, ad esempio, possiamo notare come la sovrapposizione tra i due eventi è più incoraggiante. </p>
+<p>Il grafico del Pageview dovrebbe avere una struttura simile. Tuttavia, questa discrepanza potrebbe anche essere dovuta alla struttura del sito web.</p>
+<p>Effettuerò però un check più approfondito di tutto tramite GTM. </p>
+<h3 id="la-corrispondenza-degli-eventi">La corrispondenza degli eventi</h3>
+<p><img loading="lazy" src="index/2mgxxp8bHWA3jruIxzp4zcjnk4q3OaE7canajnwl10OkY-0tcUsmc_zGYv4KizpWs6qtQgbL81V2zeqqEu-A9yVoX_Qgpwdgk5JEeIlE3TR5YlgRM5Enz8jzuf8O9xZWy6Y1DsEdfs0tlDprW4Wo5P8.png" alt=""  />
+
+La corrispondenza degli eventi è un valore particolare che va preso con le pinze. Purtroppo, non ho ancora scritto un post dettagliato sull&rsquo;argomento. Tuttavia, tale valore è condizionato dal numero di informazioni utente inoltrate insieme all&rsquo;evento. Nel caso specifico di un semplice pageview, non abbiamo a disposizione molte informazioni sull&rsquo;utente. </p>
+<p>Se l’utente non è loggato non posso sapere il suo nome o il suo indirizzo. Le uniche cose che posso sapere di lui sono l’indirizzo ip o il suo user agent, oltre naturalmente all’id browser e click di Facebook. 
+<img loading="lazy" src="index/edAhNnLiL6-qpruJgjeUbfTovEun8P-vsmU7o9qWOMvfxG3CiHbp8BSYs8ecouEE5WQnCfxZQnvFPeewPX4VTKc1ZfE9lkMAgOWJqwUvBDAZXkaR_6g2T84qyNnjgLoRkgM2c2fAE2e5N4toVrnwKnk.png" alt=""  />
+</p>
+<p>Le informazioni inoltrate sono le seguenti: </p>
+<ul>
+<li>Indirizzo IP</li>
+<li>User Agent</li>
+<li>ID Esterno</li>
+<li>ID Browser</li>
+<li>FBP</li>
+<li>FBC</li>
+</ul>
+<p>Idealmente sono più che buone per questo tipo di evento e mi può andare bene così. </p>
+<h3 id="deduplicazione-degli-eventi">Deduplicazione degli eventi</h3>
+<p><img loading="lazy" src="index/6TOLPOrVq8xBgX5_NZh42xZMiVayHtVdTFOlUznCvzEhZ-4GL8bzxjIrhbyP0v8zQMIxKMyQ1PSqZfFcOFvBO4ME_rnzwIOsWNfFT0Sbz3bjiPdXVoDtsaYBZF-3paxA-LnPd9rkWgEdz_cXEiODMRA.png" alt=""  />
+
+La deduplicazione degli eventi rappresenta un aspetto fondamentale da considerare quando si effettua il tracciamento lato server per Facebook. È importante notare che durante questo processo, inviamo sia un evento lato browser che un evento lato server, ma questi due eventi rappresentano effettivamente un singolo evento. Di conseguenza, dobbiamo aggiungere uno o più parametri al Pixel per permettere a Facebook di comprendere che si tratta dello stesso evento.</p>
+<p>In questo caso, la percentuale di eventi Pixel con un ID evento è un po&rsquo; bassa e questo solleva alcune preoccupazioni. Pertanto, effettuerò un controllo sulla corretta compilazione di quell&rsquo;evento.</p>
+<h3 id="la-frequenza-di-aggiornamento-dei-dati">La frequenza di aggiornamento dei dati</h3>
+<p><img loading="lazy" src="index/LkSNvb_3VLhPisxs6tttapFUzqOYjtT82pTxIgorHJ1BBHFl-AIhpsz03uMhRAzbF5Mw4oS4k6rt50twdBx2THvwZOzU3ezWbllAxjAAlcgeVaUtB5IoQiNqb6KdCPAEd-jg5OEV_o_4_6Wm_cwMeaU.png" alt=""  />
+
+L’altro dato più importante è la frequenza di aggiornamento dei dati. Non è detto che gli eventi lato server arrivino necessariamente in tempo reale, ma è di certo meglio che sia così. </p>
+<p>In questo caso, gli eventi lato server arrivano in tempo reale di conseguenza è un dato certamente positivo, che dimostra il fatto che il server è abbastanza sano, almeno per l’evento pageview. </p>
+<h3 id="check-su-tutti-gli-eventi">Check su tutti gli eventi</h3>
+<p>Ho eseguito questi check su tutti gli eventi, raccogliendo un pò di impressioni sullo stato di salute dei vari eventi. Ad esempio durante questo check sono sorte alcune perplessità su: </p>
+<ul>
+<li>La gestione dell’evento page_view</li>
+<li>La mancanza di alcuni parametri negli eventi</li>
+</ul>
+<h2 id="test-su-gtm">Test su GTM</h2>
+<p>Una volta completato il controllo sugli eventi da Business Manager, sono passato ad un check degli eventi all’interno di Google Tag Manager. </p>
+<p>In questo caso, trattandosi di un setting su server side, dobbiamo mandare in anteprima entrambi i container: quello lato browser e quello lato server. </p>
+<p>Da qui, analizzando gli eventi e i tag inoltrati, procedo ad effettuare reverse engineering di quello che viene attivato sul container, a partire dall’evento pageview. </p>
+<p><img loading="lazy" src="index/eMVcsBtoZupcFThnRuXZtwLVMXuWbXpmNnV228AnEWrFHHs2hQ2wX4dE6iw2jyI65p82J2f1sPLWS1_xTkEch_5J2xYL5uSdC5TSeuCVEI8s5P2kD_lZdqjGVQ2rtGno-5EVXj6WO1dbMrefHFOGK3k.png" alt=""  />
+</p>
+<p>Una volta che il container viene caricato, vengono attivati i seguenti tag: </p>
+<ul>
+<li>Il linker conversioni</li>
+<li>Il tag di remarketing di Google ADS</li>
+<li>Il tag di Hotjar</li>
+<li>Il tag di configurazione di GA4</li>
+<li>Il tag di installazione del pixel e dell’inoltro del Pageview</li>
+<li>Uno script che serve ad inoltrare un evento Search nel caso in cui l’utente utilizzi la barra di ricerca sul sito web. </li>
+</ul>
+<p>⠀Controllo tag di configurazione di GA4
+<img loading="lazy" src="index/TL808SzNU153DwiGhAgyNz9MPWmMaPCjCXBkj_ei_da52kS9QGPFDSm_ekCEW6AMnZz8MODqPO5ZkxoA9ZlWletwrImqGMX3HdYvbToVGXgLs9fb1JG_2ofxyrSDmaJIldTD0L7kwsQ__G3nQwJzmyc.png" alt=""  />
+</p>
+<p>Il tag di configurazione di GA4 raccoglie i parametri principali inseriti, come l’event_id (che inoltriamo poi al container server side) e il valore del cookie fbp. </p>
+<h3 id="confronto-event-id-ga4-con-event-id-facebook">Confronto Event ID GA4 con Event ID Facebook</h3>
+<p>Procedo quindi a confrontare l’id evento di GA4 con l’ID evento del Pixel in modo da assicurarsi che si tratti dello stesso valore. L’event ID di GA4 sarà infatti quello trasmesso al container server side e quindi trasmesso tramite evento server a Facebook. </p>
+<p><img loading="lazy" src="index/yG6htB9I381li2oEPKnhhbC89sdZJs_TKMfwyDZysCOp7242kgoK8t9NAAQwThttIrxODNAM5q_paOr9kwkf2IJLcoE3i4bXP58JYpYkLzkunfVraAq6XNyvizyHbfqGfNoeRZ4WOhQDta3GRFw6cl4.png" alt=""  />
+</p>
+<h3 id="controllo-tag-container-server-side">Controllo tag container server side</h3>
+<p><img loading="lazy" src="index/UT2KM9tnDNQ0piwii-0_1N05wsXltcAdF0vgmkkJTHTzER3ZJEsLR7dkkxGPJNXJJX05CNGCb23X0awCbG4tly3JSywlb0SpPqO7dkqQWIZ8kNjBRNkavFPBVmUAZzcKa6t1QSs9vLcTOCWI2k3SGio.png" alt=""  />
+</p>
+<p>Ho quindi effettuato un check sui dati raccolti dal container server side in modo da verificare che anche lì i dati venissero trasmessi in maniera corretta. 
+In particolare ho effettuato i seguenti controlli:</p>
+<h4 id="controllo-della-richiesta">Controllo della richiesta</h4>
+<p><img loading="lazy" src="index/4NktRZfc-uFSInv0ETYMnQaSB0VPCL6iXo4-sjbjGArTXOqPAPsc29RBb2mxH5v0sqhD7Cib3p8LAxKYzy4iLCv7YHmifG5n60jQMCVIaWyOnM5rnUujZGiXDWVzC3g3tTodRoa0XP1lauGU5b1VYgQ.png" alt=""  />
+</p>
+<p>Per prima cosa, ho fatto un check della richiesta. Cliccando sull’elemento evidenziato nello screenshot è infatti possibile controllare sia i dati della richiesta che la risposta di Facebook (in questo caso). </p>
+<p><img loading="lazy" src="index/CGYCcfWUGq0dfjtnJHmEM4twE55Bs9iiUbbUwN1xFHvWvbJ09WxUawojG2IfxP-5Vdy9ht-uOm6-S56EWCI4pHtS7Z-bS9oLtXPf2pqzdVPrkcI7u5pYBKulBCc0atKCswICixnwK0j5zJwzeYOLkAU.png" alt=""  />
+</p>
+<p>In questi casi, in particolare effettuo un check dei parametri inviati e della corrispondenza dell’event_id con quello inoltrato dal tag Facebook sul container lato browser, quindi procedo a fare un check sulla risposta del server si Facebook. 
+<img loading="lazy" src="index/yYT_tv6HUc7HSxxkhOVwmk_xu91SmX0ZXl9vQqaIjrVM8jmSykdj7dI3B7jjMvzBhcktQyenIYrAY8D2c_L5l7ugYXhGhECTdH866pMns655BT-kTFcRIFqf8b8tEAGg_kal92bGBh1oRmDsgmuRmIk.png" alt=""  />
+</p>
+<p>In caso di problemi, troverei nella response body i vari codici di errore.</p>
+<p>Questo check l’ho naturalmente effettuato su ognuno degli eventi tracciati nel container. (Si, ci vuole un pò di tempo -.-).</p>
+<h2 id="interventi-effettuati">Interventi Effettuati</h2>
+<p>Qui la lista degli interventi eseguiti sul container di GTM al fine di migliorare decisamente la qualità dei dati raccolti dal Pixel. </p>
+<h3 id="recupero-di-_fbp-e-_fbc-per-linoltro-al-server">Recupero di _fbp e _fbc per l’inoltro al server</h3>
+<p>I parametri _fbp ed _fbc sono utili per aumentare il punteggio di qualità dei vari eventi. Di conseguenza è estremamente utile inoltrarli agli eventi lato server. Nonostante l’fbp viene comunque recuperato ed inoltrato quasi in automatico, preferisco recuperarlo direttamente dal Cookie. </p>
+<p>Entrambi i parametri sono infatti conservati nei cookie del browser dell’utente.</p>
+<p><img loading="lazy" src="index/WD0HKJK_uncunoBaesDKWJbYCkRQqfUemRTQjlVGA3JfZUOJE4Fmu7rqYJo9MNjjyLpKZFVJ8Mf-pTSwKppyCGZ46NN0rtqsQ9dAOgbSXFaTJl62jENY2kVhGSyiiZlrG4SR6728LlT5E6OeP05aWe0.png" alt=""  />
+</p>
+<p>Quindi ho aggiunti i due parametri agli eventi GA4 che si occupano di comunicare con il server. </p>
+<p><img loading="lazy" src="index/TLOT8f4kK8087CfM7NKEfoAaHEXYBFllEQNEoNq6O0clSmhocotoUqO5xswzEo5_SnedqTNzT7GIRziynsp1v0XzCxRkVoTQOF6a_RKW3EdZuDtbwXGs6GIc0UeAocCUEaOZ2aDDlJVHOVT_iGb4aQA.png" alt=""  />
+</p>
+<p>Quindi ho recuperato il valore FBP dal container lato server in modo da poterlo inoltrare ai vari eventi lato server. 
+<img loading="lazy" src="index/VNx4pX2ATO0xNvktkQAxE5mZzMVQ_j7qP7jeMv179XFMKsGqPZU4h2tTUg7PJGqDNpvsfso1DZrHH2nwFU5t9tpKxUeTRXSh68uXa-suNISNzsez0u0RrV4BijVQTrdR0kvqmso_kPjfuvxJh3I4Cpw.png" alt=""  />
+</p>
+<p>Dato che sul container lato server utilizziamo il tag di stape.io, ho inserito i due parametri all’interno dei campi “User Data” dei vari tag. </p>
+<p><img loading="lazy" src="index/ZPDQ_HO1tFDN3ouosnMNCtRIEEPhK198Q1ftbZ8wHBJ4ziVI03P5R3i65vi4eWGvsIxZUuOFRDbSH8AlOl7th1TpU4f4uwwkD8fSLo8FSISwsMxd9NB-_LZqG5M6sBjR4HqW7bhfInQ_GiZa_Js2pmc.png" alt=""  />
+</p>
+<h3 id="modifica-id-stream-ga4">Modifica ID Stream GA4</h3>
+<p>Modificato l’ID Stream di GA4 che non risultava corretto. Era già presente una variabile settata dal cliente, ma quest’ultima non aveva un valore reale. Ho quindi provveduto a modificare la variabile. </p>
+<p><img loading="lazy" src="index/ISGLKoP9IO0Rscg130F1frMk-8gqb-ykQxrXEmaVF9UdCjKHt1e-UeNPi5owQNQRF1ry8w_AXJt9e8RBkDl5l8fzC6QarRREA1qrT4pL1P2fO2HIltuNe8acCs_sRDzveStLerOK35t1ICJNQCNNasc.png" alt=""  />
+</p>
+<h3 id="cambio-pagina-asincroni">Cambio pagina asincroni</h3>
+<p>Sempre dal test tramite GTM ho notato che alcuni cambi di pagina avvengono in asincrono. Questo significa che non avviene un effettivo caricamento della pagina, ma un banale refresh di quello che è visualizzato. </p>
+<p><img loading="lazy" src="index/z2cfYAebnYR9DvRrQglbkcnEKPNyMK-M2eJHYtnryPmuaoDaTMZfPjqdsAvvCukKGzo82ddKpvRrvjI49NR7t8vHQEA6q3thrsWmbOY4BAQAEtlMtyRSz6-Ay-39J1SmhLHKA0YKww7SCL4aJvGWtfM.png" alt=""  />
+</p>
+<p>Ho quindi sfruttato l’inoltro dell’evento aggiungendo un trigger ai tag di visualizzazione di pagina sia di Facebook che di GA4.</p>
+<p><img loading="lazy" src="index/uPjJ_IMkkZkHWyST_DOivaOOfzMmDoqOwdPP-2lYJ5KHQp_6Dpe7yuvt8Ti5WGn38riA6G6TaS0GZo6TmnHDdXSYIV3YRMbAqSDVfToNc431e7D1wL9uf_b12uO0UKqRU8w1E76tfhB8MzM6EZnLpzo.png" alt=""  />
+</p>
+<h3 id="dati-utente-sullevento-lead">Dati utente sull’evento Lead</h3>
+<p>Sull’evento Lead, venivano inoltrati a GA4 tutta una serie di informazioni utente che non erano però state condivise né con il tag lato browser di Facebook, ne con il tag lato server si GADS. </p>
+<p>Ho quindi provveduto a recuperare le variabili sul container server in modo da poter inoltrare le informazioni utente. </p>
+<p><img loading="lazy" src="index/_9px82s5U16VdaoUVFDiMjm_Izh0_UWshsAzKaB6hsMiQUvfXy3YyDrTrG8bqgTiXE0dmvMlRL1nJO04OpQqz5eUJcSfJf-STukEs1TFXTCC_QE4kpC13z5UVkzHg4sN4UR7pP2tWm2hwgr7wtXx2rM.png" alt=""  />
+
+<img loading="lazy" src="index/nRfUPQTPZkd6-3wv_oDlvFuv88ipt_nZIcWSs0sbYI7obmWqETqZedYlNpfoojwSEKeRAmdw4G43SnjbowPDnp1t0xJQkZO-I5jMuJweJIpkQkwJOVIPHxUDDSn8c2_wt0jEqwsXReiwnkIlNQGUBrA.png" alt=""  />
+</p>
+<p><img loading="lazy" src="index/Uil9AsRePE4k85LwLWAIMJEiFHQ4-VnbX2RIp-5_Ss18zJ20xprir4NNKzxJB7VRLKLDZVJtn9U1eASE8iFe_i1Q1W0FIEKQUqYWJPAih0GTKLP33OoPWluzrZ8y4Q5XFbfrdNeCyqc6wYppgif6eCU.png" alt=""  />
+</p>
+<p>Per sicurezza, ho inoltrato le stesse informazioni anche all’evento lato browser. </p>
+<p><img loading="lazy" src="index/HrQkiQp7W9_Sb5wVwfYXI5dB2RYKm55gaxM4PMaznYbhWb-RVZ_vMTqc07Wg9pSgi424UZPWSy1cBcZ4N0ympXeSKm1DjMH8CEkCbbetr81RCYWMewkEUh4ue4GhYDWXFEEnjD3zD-wmjQ91U1n9dOQ.png" alt=""  />
+</p>
+<h3 id="altri-piccoli-errori">Altri piccoli errori</h3>
+<p>A parte questo, sul setting risultavano presenti piccoli errori di distrazione, ma nulla di invalidante. Ho ad esempio sistemato la nomenclatura di alcuni tag ed il nome di alcune variabili. </p>
+<p>Nulla che non vada, ma la nomenclatura su di un container di GTM è davvero importante, soprattutto se tornerai a lavorare su quel container dopo tanto tempo. </p>
+<p>Si, sono un rompiscatole rispetto a questi temi, ma davvero credo che nel lungo periodo faccia la differenza. </p>
+<h2 id="controllo-test-event">Controllo Test Event</h2>
+<p>Dopo aver effettuato tutte le modifiche e le azioni correttive, al fine di effettuare un ultimo check della configurazione, ho effettuato un test tramite il tool “Testa gli eventi” di facebook, in modo da verificare in real_time l’inoltro degli eventi. </p>
+<p>Naturalmente ho recuperato il test event code dall’interfaccia e l’ho caricato sui tag del container lato server, in modo da poter debuggare anche quelli. </p>
+<p><img loading="lazy" src="index/upucZ6Lq08LOOPAkzzjw7uiGPnDQdr-jYjXbPjXKH-zFcOekbmN7aR5ZJTIwjCklnf4mIiHdjr4Ea5koMuzk-F-pcO1XUmElAag2NqRgCqrxCrfGxZ8G1l4AHHA9hq1Pipm3s6abRlhJJ7wNukAahSQ.png" alt=""  />
+</p>
+<p>Dal mio controllo finale, tutti gli eventi sono stati ricevuti correttamente e correttamente deduplicati da Facebook. Di conseguenza, ho potuto mettere in pausa il tutto al fine di verificare successivamente nei prossimi giorni. </p>
+<p>Perché una successiva verifica? Perché non si è mai abbastanza tranquilli e di conseguenza è meglio lasciare che facebook raccolga un paio di giorni di dati e da lì effettuare un test più veloce. </p>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

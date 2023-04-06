@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Appunti sul Measurement Protocol di GA4 | Enrico Chiolo</title>
+<meta name="keywords" content="GA4">
+<meta name="description" content="Ho aiutato alcuni clienti ad inoltrare eventi lato server con GA4. Per farlo, abbiamo utilizzato il Measurment Protocol. Ho preso un pò di appunti che vorrei condividere con te">
+<meta name="author" content="">
+<link rel="canonical" href="https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.587c405b541add4bc7acaff9ff032638c59eafe7e52fde0457a35d9964e51a12.css" integrity="sha256-WHxAW1Qa3UvHrK/5/wMmOMWer&#43;flL94EV6NdmWTlGhI=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://blog.enricochiolo.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://blog.enricochiolo.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://blog.enricochiolo.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://blog.enricochiolo.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://blog.enricochiolo.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Appunti sul Measurement Protocol di GA4" />
+<meta property="og:description" content="Ho aiutato alcuni clienti ad inoltrare eventi lato server con GA4. Per farlo, abbiamo utilizzato il Measurment Protocol. Ho preso un pò di appunti che vorrei condividere con te" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/" />
+<meta property="og:image" content="https://blog.enricochiolo.com/appunti-digital-analytics.png" /><meta property="article:section" content="digital-analytics-note" />
+<meta property="article:published_time" content="2023-04-05T11:30:03+00:00" />
+<meta property="article:modified_time" content="2023-04-05T11:30:03+00:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog.enricochiolo.com/appunti-digital-analytics.png" />
+<meta name="twitter:title" content="Appunti sul Measurement Protocol di GA4"/>
+<meta name="twitter:description" content="Ho aiutato alcuni clienti ad inoltrare eventi lato server con GA4. Per farlo, abbiamo utilizzato il Measurment Protocol. Ho preso un pò di appunti che vorrei condividere con te"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Appunti Digital Analytics",
+      "item": "https://blog.enricochiolo.com/digital-analytics-note/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Appunti sul Measurement Protocol di GA4",
+      "item": "https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Appunti sul Measurement Protocol di GA4",
+  "name": "Appunti sul Measurement Protocol di GA4",
+  "description": "Ho aiutato alcuni clienti ad inoltrare eventi lato server con GA4. Per farlo, abbiamo utilizzato il Measurment Protocol. Ho preso un pò di appunti che vorrei condividere con te",
+  "keywords": [
+    "GA4"
+  ],
+  "articleBody": "Introduzione Secondo la documentazione ufficiale di Google, il Measurement Protocol per Google Analytics 4 consente agli sviluppatori di migliorare gli stream web e delle app inviando eventi direttamente ai server di Google Analytics tramite richieste HTTP.\nIn pratica, questo significa che possiamo inoltrare eventi a Google Analytics utilizzando semplici richieste HTTP, senza l’ausilio diretto delle librerie di Google Analytics. Ciò è particolarmente utile per inoltrare eventi lato server o conversioni offline a Google Analytics. Ad esempio, il protocollo potrebbe essere utilizzato per inoltrare eventi purchase basati sul rinnovo automatico di abbonamenti o in tutte quelle situazioni in cui non c’è un’interazione diretta da parte dell’utente. Inoltre, il protocollo potrebbe essere utilizzato in sistemi in cui il lead viene lavorato all’interno di un CRM e la conversione avviene in realtà fuori dalla parte web.\nIn particolare, Google ci dice che gli sviluppatori possono utilizzare Measurement Protocol per:\n Collegare il comportamento online a quello offline; Misurare le interazioni lato client e lato server; Inviare eventi che si verificano al di fuori dell’interazione utente standard (ad es. le conversioni offline) Inviare eventi da dispositivi e applicazioni in cui la raccolta automatica non è disponibile (ad esempio kiosk, orologi e così via).  ⠀Convalidare \u0026 Testare gli eventi Per testare gli eventi, è possibile utilizzare l’Event Builder per GA4, che permette di costruire l’evento, aggiungere i parametri e verificare sia il payload che l’inoltro delle informazioni. ~https://ga-dev-tools.google/ga4/event-builder/~\nTuttavia, gli eventi inviati tramite Measurement Protocol non sono di solito visualizzati nella console di debug, a meno che non si aggiunga il parametro “debug_mod” con valore 1. In questo modo, gli eventi verranno visualizzati sulla console di debug. Inoltre, è importante che il client_id sia valido e presente all’interno di GA4, e questo valore può essere recuperato direttamente dal browser, considerando la stringa composta da 20 caratteri separati da un punto.\nPanoramica sull’architettua L’immagine qui sotto illustra una panoramica dell’architettura- Alcune Avvertenze Remarketing Quando Google Signals è attivato, è supportato il remarketing per lo stesso dispositivo. Per il remarketing cross-device è necessario un ID utente aggiuntivo\nInformazioni Geografiche Le informazioni geografiche sono disponibili solo tramite la raccolta automatica da gtag, Google Tag Manager o Google Analytics per Firebase.\nInoltrare solo eventi tramite il protocollo di misurazione Anche se è possibile inviare eventi a Google Analytics solo tramite il protocollo di misurazione, potrebbe essere disponibile solo una parte dei report. Lo scopo del protocollo di misurazione è quello di integrare gli eventi esistenti raccolti tramite gtag, GTM o Firebase.\nIl protocollo di misurazione non sostituisce l’inoltro di eventi tramite i metodi più tradizionali, ma è un supporto necessario per l’integrazione di eventi aggiuntivi, in quanto è soggetto a alcune importanti limitazioni.\nInviare eventi a GA4 tramite Measurement Protocol Per l’inoltro di eventi a GA4 è necessario effettuare una richiesta HTTP di tipo POST al seguente endpoint:\nPOST /mp/collect HTTP/1.1 HOST: ~www.google-analytics.com~ Content-Type: application/json \nParametri Obbligatori Per inoltrare le richieste tramite il Measurement Protocol, è necessario specificare alcuni parametri. Questi possono variare a seconda che si utilizzi Firebase o gtag.js.\nMomentaneamente, osserviamo solo i parametri obbligatori quando si utilizza il tag di Google e non Firebase.\napi_secret - Obbligatorio. Un elemento API SECRET generato nell’interfaccia utente di Google Analytics. Per creare un nuovo secret, vai a: Amministratore  stream di dati  scegli il tuo stream  Measurement Protocol  Create\nmeasurement_id - Obbligatorio. L’ID misurazione associato a uno stream. Nell’interfaccia utente di Google Analytics in: Amministrazione  stream di dati  scegli il tuo stream  ID misurazione\nOra, l’api_secret e il mesaurement_id possono essere recuperati entrambi in modo abbastanza semplice direttamente dalla nostra proprietà di GA4. Le cose si complicano un poco per quanto riguarda invece il body della nostra richiesta HTTP. Per quanto riguarda invece il corpo del JSON della richiesta è necessario inoltrare le seguenti informazioni:\n client_id - Obbligatorio. Identificatore univoco di un client. user_id - Facoltativo. Identificatore univoco di un utente. Per ulteriori informazioni su questo identificatore, consulta la pagina ~User-ID per l’analisi multipiattaforma~. events - Obbligatorio. Un array di elementi evento.  Recuperare il Client ID Per quanto riguarda il client_id, quest’ultimo deve essere recuperato e memorizzato da qualche parte. Ma andiamo con ordine: il client_id è un identificativo univoco dell’utente. Generalmente, viene memorizzato all’interno del cookie _ga del browser dell’utente e identifica l’utente in tutte le sue sessioni effettuate con lo stesso browser. Utilizzando un’estensione del browser che consente di visualizzare i cookie, è possibile leggere il valore assegnato al client_id. Tuttavia, attenzione: il client_id è il valore numerico composto da 20 caratteri seguito dal punto “.” e dalla porzione iniziale “GA1.1.” È possibile recuperare il client_id dell’utente anche utilizzando la funzione gtag() con il metodo get, come descritto nella documentazione.\ngtag('get', 'G-NW1BQ5DLJC', 'client_id', (clientID) = { console.log(\"Questo è il client id:\"+clientID) });  Nell’esempio sopra, il client_id viene recuperato tramite la funzione gtag(‘get’) e viene stampato nella console di Javascript. Per garantire la corretta elaborazione degli eventi del Protocollo di Misurazione, è necessario che il client_id sia presente in GA4. Pertanto, se si inoltrano conversioni offline, è importante memorizzare ed inviare il client_id al nostro CRM. In questo modo, saremo in grado di ricostruire anche le eventuali conversioni avvenute offline. Questo è uno step di vitale importanza.\nNota: Non ho ancora eseguito sufficienti test per comprendere cosa accade se il client_id non viene recuperato correttamente. Dalle prove effettuate, posso tuttavia assicurare che se il campo debug_mode viene impostato su 1 e il client_id non è presente in GA4, gli eventi non vengono visualizzati in Debug. Presumo che gli eventi vengano comunque ricevuti correttamente. Farò ulteriori test in futuro per verificare ciò.\nEventi Il terzo parametro obbligatorio per l’inoltro della richiesta è il parametro events. Si tratta in realtà di un array di oggetti contenenti le informazioni sugli eventi.\nPer quanto riguarda la tipologia di eventi inoltrabili, da quello che ho visto è possibile inoltrare sia eventi custom che eventi consigliati di GA4. Il mio consiglio, soprattutto per quanto riguarda la costruzione del payload è quello di utilizzare l’event builder di GA4 (trovate il link sopra) per generare degli eventi di prova da utilizzare come base. Inoltrare un’evento Qui sotto un esempio di richiesta http per l’inoltro di eventi tramite Mesaurement Protocol presa dalla documentazione ufficiale. E’ comunque possibile eseguire un test tramite la console del browser inoltrando alcuni eventi direttamente dal sito web. Naturalmente i campi mesaurement_id e api_secret vanno correttamente compilati, ma una volta fatto, è possibile osservare la vista in tempo reale sulla quale dovreste vedere gli eventi arrivare. const measurement_id = `G-fdsfdsfds`; const api_secret = `q-8ZC-kyfdsfdsfsdfds`;  fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}\u0026api_secret=${api_secret}`, {  method: \"POST\",  body: JSON.stringify({  \"client_id\": \"1395066687.1671008361\",  \"non_personalized_ads\": false,  \"events\": [  {  \"name\": \"subscription\",  \"params\": {  \"items\": [  {  \"item_id\": \"IDITEM\",  \"item_name\": \"Rinnovo Abbonamento\",  \"quantity\": 1,  \"item_brand\": \"test\",  \"item_category\": \"Abbonamento\",  \"item_variant\": \"Variante Abbonamento\",  \"price\": 11,  \"currency\": \"EUR\"  }  ],  \"currency\": \"EUR\",  \"transaction_id\": \"000001\",  \"shipping\": 5,  \"tax\": 4,  \"value\": 11  } Una volta inoltrato l’evento dovreste vederlo arrivare sulla vista in tempo reale. In alternativa, aggiungendo il campo debug_mode = 1 + un client_id esistente, dovreste riuscire a vederlo all’interno della debug mode in modo abbastanza semplice. Conclusioni Inoltrare eventi tramite il Measurement Protocol di GA4 non è una cosa complicata. Si tratta banalmente di effettuare una richiesta HTTP all’endpoint indicato compilando correttamente i vari parametri dell’evento. La vera sfida, in questo caso, sta proprio nella compilazione del body della richiesta. Affinché l’inoltro di eventi abbia senso, è necessario gestire in modo adeguato sia il client_id che lo user_id.\nNonostante quest’ultimo non sia un parametro obbligatorio è in realtà fondamentale per poter ricostruire il percorso di acquisto di un utente.\nEcco perché, in questo caso la sfida non è tanto tecnologica quanto organizzativa. Il processo di analisi va strutturato a monte, in modo da avere ben chiare le informazioni da inoltrare tramite richiesta HTTP. In realtà ci sarebbero anche altre piccole cose da considerare per l’inoltro, tuttavia, la documentazione ufficiale è ben scritta, quindi per tutto il resto, vi rimando a quella.  ",
+  "wordCount" : "1319",
+  "inLanguage": "en",
+  "image":"https://blog.enricochiolo.com/appunti-digital-analytics.png","datePublished": "2023-04-05T11:30:03Z",
+  "dateModified": "2023-04-05T11:30:03Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Enrico Chiolo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blog.enricochiolo.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://blog.enricochiolo.com" accesskey="h" title="Enrico Chiolo (Alt + H)">Enrico Chiolo</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://blog.enricochiolo.com">Home</a>&nbsp;»&nbsp;<a href="https://blog.enricochiolo.com/digital-analytics-note/">Appunti Digital Analytics</a></div>
+    <h1 class="post-title">
+      Appunti sul Measurement Protocol di GA4
+    </h1>
+    <div class="post-meta"><span title='2023-04-05 11:30:03 +0000 +0000'>April 5, 2023</span>&nbsp;·&nbsp;7 min
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="lazy" srcset="https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics_hu811ad5934032a3badc6968fe07d46649_35488_360x0_resize_box_3.png 360w ,https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics_hu811ad5934032a3badc6968fe07d46649_35488_480x0_resize_box_3.png 480w ,https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics_hu811ad5934032a3badc6968fe07d46649_35488_720x0_resize_box_3.png 720w ,https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics_hu811ad5934032a3badc6968fe07d46649_35488_1080x0_resize_box_3.png 1080w ,https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics_hu811ad5934032a3badc6968fe07d46649_35488_1500x0_resize_box_3.png 1500w ,https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics.png 2240w" 
+            sizes="(min-width: 768px) 720px, 100vw" src="https://blog.enricochiolo.com/digital-analytics-note/measurment-protocol-ga4/appunti-digital-analytics.png" alt="Capi Facebook Stape" 
+            width="2240" height="1260">
+        <p>Appunti Digital Analytics</p>
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul>
+                <li>
+                    <a href="#introduzione" aria-label="Introduzione">Introduzione</a></li>
+                <li>
+                    <a href="#panoramica-sullarchitettua" aria-label="Panoramica sull’architettua">Panoramica sull’architettua</a></li>
+                <li>
+                    <a href="#alcune-avvertenze" aria-label="Alcune Avvertenze">Alcune Avvertenze</a><ul>
+                        
+                <li>
+                    <a href="#remarketing" aria-label="Remarketing">Remarketing</a></li>
+                <li>
+                    <a href="#informazioni-geografiche" aria-label="Informazioni Geografiche">Informazioni Geografiche</a></li>
+                <li>
+                    <a href="#inoltrare-solo-eventi-tramite-il-protocollo-di-misurazione" aria-label="Inoltrare solo eventi tramite il protocollo di misurazione">Inoltrare solo eventi tramite il protocollo di misurazione</a></li></ul>
+                </li>
+                <li>
+                    <a href="#inviare-eventi-a-ga4-tramite-measurement-protocol" aria-label="Inviare eventi a GA4 tramite Measurement Protocol">Inviare eventi a GA4 tramite Measurement Protocol</a><ul>
+                        
+                <li>
+                    <a href="#parametri-obbligatori" aria-label="Parametri Obbligatori">Parametri Obbligatori</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#recuperare-il-client-id" aria-label="Recuperare il Client ID">Recuperare il Client ID</a></li></ul>
+                    </ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#inoltrare-unevento" aria-label="Inoltrare un’evento">Inoltrare un’evento</a></li></ul>
+                    
+                <li>
+                    <a href="#conclusioni" aria-label="Conclusioni">Conclusioni</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="introduzione">Introduzione<a hidden class="anchor" aria-hidden="true" href="#introduzione">#</a></h2>
+<p>Secondo la documentazione ufficiale di Google, il Measurement Protocol per Google Analytics 4 consente agli sviluppatori di migliorare gli stream web e delle app inviando eventi direttamente ai server di Google Analytics tramite richieste HTTP.</p>
+<p>In pratica, questo significa che possiamo inoltrare eventi a Google Analytics utilizzando semplici richieste HTTP, senza l&rsquo;ausilio diretto delle librerie di Google Analytics. </p>
+<p>Ciò è particolarmente utile per inoltrare eventi lato server o conversioni offline a Google Analytics. </p>
+<p>Ad esempio, il protocollo potrebbe essere utilizzato per inoltrare eventi purchase basati sul rinnovo automatico di abbonamenti o in tutte quelle situazioni in cui non c&rsquo;è un&rsquo;interazione diretta da parte dell&rsquo;utente. </p>
+<p>Inoltre, il protocollo potrebbe essere utilizzato in sistemi in cui il lead viene lavorato all&rsquo;interno di un CRM e la conversione avviene in realtà fuori dalla parte web.</p>
+<p>In particolare, Google ci dice che gli sviluppatori possono utilizzare Measurement Protocol per:</p>
+<ul>
+<li>Collegare il comportamento online a quello offline;</li>
+<li>Misurare le interazioni lato client e lato server;</li>
+<li>Inviare eventi che si verificano al di fuori dell&rsquo;interazione utente standard (ad es. le conversioni offline)</li>
+<li>Inviare eventi da dispositivi e applicazioni in cui la raccolta automatica non è disponibile (ad esempio kiosk, orologi e così via).</li>
+</ul>
+<p>⠀Convalidare &amp; Testare gli eventi
+Per testare gli eventi, è possibile utilizzare l&rsquo;Event Builder per GA4, che permette di costruire l&rsquo;evento, aggiungere i parametri e verificare sia il payload che l&rsquo;inoltro delle informazioni. </p>
+<p>~<a href="https://ga-dev-tools.google/ga4/event-builder/">https://ga-dev-tools.google/ga4/event-builder/</a>~</p>
+<p>Tuttavia, gli eventi inviati tramite Measurement Protocol non sono di solito visualizzati nella console di debug, a meno che non si aggiunga il parametro &ldquo;debug_mod&rdquo; con valore 1. </p>
+<p>In questo modo, gli eventi verranno visualizzati sulla console di debug. Inoltre, è importante che il client_id sia valido e presente all&rsquo;interno di GA4, e questo valore può essere recuperato direttamente dal browser, considerando la stringa composta da 20 caratteri separati da un punto.</p>
+<h2 id="panoramica-sullarchitettua">Panoramica sull’architettua<a hidden class="anchor" aria-hidden="true" href="#panoramica-sullarchitettua">#</a></h2>
+<p>L’immagine qui sotto illustra una panoramica dell’architettura-
+<img loading="lazy" src="index/DzegqWUGMs0_4B9Vu0Z76t4DwM9kPI-iXWdE8Lkwctt8yvYSKM_4HU8tscEBqXkvmZwVjv56qzhmb-Vowe8W99THlOPYFZyeGVoY71tNi-uSGZAlIZls51jJdElvvznhKAxSWUB-Dec2OjIpkS_V3oI.png" alt=""  />
+</p>
+<h2 id="alcune-avvertenze">Alcune Avvertenze<a hidden class="anchor" aria-hidden="true" href="#alcune-avvertenze">#</a></h2>
+<h3 id="remarketing">Remarketing<a hidden class="anchor" aria-hidden="true" href="#remarketing">#</a></h3>
+<p>Quando Google Signals è attivato, è supportato il remarketing per lo stesso dispositivo. Per il remarketing cross-device è necessario un ID utente aggiuntivo</p>
+<h3 id="informazioni-geografiche">Informazioni Geografiche<a hidden class="anchor" aria-hidden="true" href="#informazioni-geografiche">#</a></h3>
+<p>Le informazioni geografiche sono disponibili solo tramite la raccolta automatica da gtag, Google Tag Manager o Google Analytics per Firebase.</p>
+<h3 id="inoltrare-solo-eventi-tramite-il-protocollo-di-misurazione">Inoltrare solo eventi tramite il protocollo di misurazione<a hidden class="anchor" aria-hidden="true" href="#inoltrare-solo-eventi-tramite-il-protocollo-di-misurazione">#</a></h3>
+<p>Anche se è possibile inviare eventi a Google Analytics solo tramite il protocollo di misurazione, potrebbe essere disponibile solo una parte dei report. Lo scopo del protocollo di misurazione è quello di integrare gli eventi esistenti raccolti tramite gtag, GTM o Firebase.</p>
+<p>Il protocollo di misurazione non sostituisce l&rsquo;inoltro di eventi tramite i metodi più tradizionali, ma è un supporto necessario per l&rsquo;integrazione di eventi aggiuntivi, in quanto è soggetto a alcune importanti limitazioni.</p>
+<h2 id="inviare-eventi-a-ga4-tramite-measurement-protocol">Inviare eventi a GA4 tramite Measurement Protocol<a hidden class="anchor" aria-hidden="true" href="#inviare-eventi-a-ga4-tramite-measurement-protocol">#</a></h2>
+<p>Per l’inoltro di eventi a GA4 è necessario effettuare una richiesta HTTP di tipo POST al seguente endpoint:</p>
+<p>POST /mp/collect HTTP/1.1
+HOST: ~<a href="http://www.google-analytics.com/">www.google-analytics.com</a>~
+Content-Type: application/json
+&lt;payload_data&gt;</p>
+<h3 id="parametri-obbligatori">Parametri Obbligatori<a hidden class="anchor" aria-hidden="true" href="#parametri-obbligatori">#</a></h3>
+<p>Per inoltrare le richieste tramite il Measurement Protocol, è necessario specificare alcuni parametri. Questi possono variare a seconda che si utilizzi Firebase o gtag.js.</p>
+<p>Momentaneamente, osserviamo solo i parametri obbligatori quando si utilizza il tag di Google e non Firebase.</p>
+<p><strong>api_secret</strong> - Obbligatorio. Un elemento API SECRET generato nell&rsquo;interfaccia utente di Google Analytics. Per creare un nuovo secret, vai a:
+Amministratore &gt; stream di dati &gt; scegli il tuo stream &gt; Measurement Protocol &gt; Create</p>
+<p><strong>measurement_id</strong> - Obbligatorio. L&rsquo;ID misurazione associato a uno stream. Nell&rsquo;interfaccia utente di Google Analytics in:
+Amministrazione &gt; stream di dati &gt; scegli il tuo stream &gt; ID misurazione</p>
+<p>Ora, l’api_secret e il mesaurement_id possono essere recuperati entrambi in modo abbastanza semplice direttamente dalla nostra proprietà di GA4. Le cose si complicano un poco per quanto riguarda invece il body della nostra richiesta HTTP.
+Per quanto riguarda invece il corpo del JSON della richiesta è necessario inoltrare le seguenti informazioni:</p>
+<ul>
+<li><strong>client_id</strong> - Obbligatorio. Identificatore univoco di un client.</li>
+<li><strong>user_id</strong> - Facoltativo. Identificatore univoco di un utente. Per ulteriori informazioni su questo identificatore, consulta la pagina ~<a href="https://support.google.com/analytics/answer/9213390?hl=it">User-ID per l&rsquo;analisi multipiattaforma</a>~.</li>
+<li><strong>events</strong> - Obbligatorio. Un array di elementi evento.</li>
+</ul>
+<h5 id="recuperare-il-client-id">Recuperare il Client ID<a hidden class="anchor" aria-hidden="true" href="#recuperare-il-client-id">#</a></h5>
+<p>Per quanto riguarda il client_id, quest&rsquo;ultimo deve essere recuperato e memorizzato da qualche parte. </p>
+<p>Ma andiamo con ordine: il client_id è un identificativo univoco dell&rsquo;utente. Generalmente, viene memorizzato all&rsquo;interno del cookie _ga del browser dell&rsquo;utente e identifica l&rsquo;utente in tutte le sue sessioni effettuate con lo stesso browser. </p>
+<p>Utilizzando un&rsquo;estensione del browser che consente di visualizzare i cookie, è possibile leggere il valore assegnato al client_id. </p>
+<p>Tuttavia, attenzione: il client_id è il valore numerico composto da 20 caratteri seguito dal punto &ldquo;.&rdquo; e dalla porzione iniziale &ldquo;GA1.1.&rdquo; È possibile recuperare il client_id dell&rsquo;utente anche utilizzando la funzione gtag() con il metodo get, come descritto nella documentazione.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">gtag</span>(<span style="color:#e6db74">&#39;get&#39;</span>, <span style="color:#e6db74">&#39;G-NW1BQ5DLJC&#39;</span>, <span style="color:#e6db74">&#39;client_id&#39;</span>, (<span style="color:#a6e22e">clientID</span>) =&gt; {   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Questo è il client id:&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">clientID</span>)   });
+</span></span></code></pre></div><p> 
+Nell’esempio sopra, il client_id viene recuperato tramite la funzione gtag(‘get’) e viene stampato nella console di Javascript. </p>
+<p>Per garantire la corretta elaborazione degli eventi del Protocollo di Misurazione, è necessario che il client_id sia presente in GA4. </p>
+<p>Pertanto, se si inoltrano conversioni offline, è importante memorizzare ed inviare il client_id al nostro CRM. In questo modo, saremo in grado di ricostruire anche le eventuali conversioni avvenute offline. Questo è uno step di vitale importanza.</p>
+<p><strong>Nota</strong>: Non ho ancora eseguito sufficienti test per comprendere cosa accade se il client_id non viene recuperato correttamente. Dalle prove effettuate, posso tuttavia assicurare che se il campo debug_mode viene impostato su 1 e il client_id non è presente in GA4, gli eventi non vengono visualizzati in Debug. Presumo che gli eventi vengano comunque ricevuti correttamente. Farò ulteriori test in futuro per verificare ciò.</p>
+<p><strong>Eventi</strong>
+Il terzo parametro obbligatorio per l’inoltro della richiesta è il parametro events. Si tratta in realtà di un array di oggetti contenenti le informazioni sugli eventi.</p>
+<p>Per quanto riguarda la tipologia di eventi inoltrabili, da quello che ho visto è possibile inoltrare sia eventi custom che eventi consigliati di GA4. </p>
+<p>Il mio consiglio, soprattutto per quanto riguarda la costruzione del payload è quello di utilizzare l’event builder di GA4 (trovate il link sopra) per generare degli eventi di prova da utilizzare come base. </p>
+<h2 id="inoltrare-unevento">Inoltrare un’evento<a hidden class="anchor" aria-hidden="true" href="#inoltrare-unevento">#</a></h2>
+<p>Qui sotto un esempio di richiesta http per l’inoltro di eventi tramite Mesaurement Protocol presa dalla documentazione ufficiale. E’ comunque possibile eseguire un test tramite la console del browser inoltrando alcuni eventi direttamente dal sito web. 
+Naturalmente i campi mesaurement_id e api_secret vanno correttamente compilati, ma una volta fatto, è possibile osservare la vista in tempo reale sulla quale dovreste vedere gli eventi arrivare. </p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">measurement_id</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`G-fdsfdsfds`</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">api_secret</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`q-8ZC-kyfdsfdsfsdfds`</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`https://www.google-analytics.com/mp/collect?measurement_id=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">measurement_id</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&amp;api_secret=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">api_secret</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>, {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;client_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;1395066687.1671008361&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;non_personalized_ads&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;events&#34;</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;subscription&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;params&#34;</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;items&#34;</span><span style="color:#f92672">:</span> [
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;item_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;IDITEM&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;item_name&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Rinnovo Abbonamento&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;quantity&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;item_brand&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;test&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;item_category&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Abbonamento&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;item_variant&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Variante Abbonamento&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;price&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;currency&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;EUR&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;currency&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;EUR&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;transaction_id&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;000001&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;shipping&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tax&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;value&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span></code></pre></div><p>Una volta inoltrato l’evento dovreste vederlo arrivare sulla vista in tempo reale. </p>
+<p><img loading="lazy" src="index/Eekx5l_XUIlfwwKsIjYwD3KXwP3x6b12KzrWuRd311QfStVafDITZNCH1V2OJmHCe-u7_nfdeILVMRrr4xzmcroojzQC0kfvj3-b_U8LRU0C0-ZVMMb_ZdLyVsGtAec8vpR3In2jSzI0N-Hh8BhKqA4.png" alt=""  />
+
+In alternativa, aggiungendo il campo debug_mode = 1 + un client_id esistente, dovreste riuscire a vederlo all’interno della debug mode in modo abbastanza semplice. </p>
+<h1 id="conclusioni">Conclusioni<a hidden class="anchor" aria-hidden="true" href="#conclusioni">#</a></h1>
+<p>Inoltrare eventi tramite il Measurement Protocol di GA4 non è una cosa complicata.  Si tratta banalmente di effettuare una richiesta HTTP all’endpoint indicato compilando correttamente i vari parametri dell’evento. </p>
+<p>La vera sfida, in questo caso, sta proprio nella compilazione del body della richiesta. Affinché l’inoltro di eventi abbia senso, è necessario gestire in modo adeguato sia il client_id che lo user_id.</p>
+<p>Nonostante quest’ultimo non sia un parametro obbligatorio è in realtà fondamentale per poter ricostruire il percorso di acquisto di un utente.</p>
+<p>Ecco perché, in questo caso la sfida non è tanto tecnologica quanto organizzativa. Il processo di analisi va strutturato a monte, in modo da avere ben chiare le informazioni da inoltrare tramite richiesta HTTP. </p>
+<p>In realtà ci sarebbero anche altre piccole cose da considerare per l’inoltro, tuttavia, la documentazione ufficiale è ben scritta, quindi per tutto il resto, vi rimando a quella. </p>
+<p> </p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://blog.enricochiolo.com/tags/ga4/">GA4</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://blog.enricochiolo.com/wip/controllo-capi-gtm-server-side/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Controllo CAPI con GTM Server Side (Stape.io)</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://blog.enricochiolo.com">Enrico Chiolo</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
