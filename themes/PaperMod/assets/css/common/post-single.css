@@ -51,7 +51,6 @@
 .post-content h2 {
     margin: 32px auto 24px;
     font-size: 32px;
-    
 }
 
 .post-content h3 {
@@ -73,6 +72,8 @@
 .post-content a,
 .toc a:hover {
     box-shadow: 0 1px 0;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
 }
 
 .post-content a code {
@@ -82,8 +83,7 @@
 }
 
 .post-content del {
-    text-decoration: none;
-    background: linear-gradient(to right, var(--primary) 100%, transparent 0) 0 50%/1px 1px repeat-x;
+    text-decoration: line-through;
 }
 
 .post-content dl,
@@ -317,38 +317,7 @@
     color: var(--secondary);
     font-size: 14px;
     line-height: 34px;
-    background: #FFE161;
-}
-
-.post-category li{
-    display: inline-block;
-    margin-inline-end: 3px;
-    margin-bottom: 5px;
-    margin-top: 20px;
-
-}
-
-.post-category a{
-    display: block;
-    padding-inline-start: 14px;
-    padding-inline-end: 14px;
-    color: var(--secondary);
-    font-size: 14px;
-    line-height: 34px;
     background: var(--code-bg);
-    border-radius: var(--radius);
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    background-color: #FF6666;
-    color:aliceblue;
-
-}
-
-.post-meta-added{
-    padding:30px;
-    border: dotted 2px;
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 .post-tags a:hover,

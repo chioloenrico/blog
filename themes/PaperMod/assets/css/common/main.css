@@ -66,9 +66,3 @@ div.highlight:hover .copy-code,
 pre:hover .copy-code {
     display: block;
 }
-
-
-.home-category{
-    margin-top:10px;
-    display: block;
-}

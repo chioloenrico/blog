@@ -1,165 +1,56 @@
-baseURL: "https://blog.enricochiolo.com/"
-languageCode: "it"
-theme: "PaperMod"
-title: "Enrico Chiolo"
+baseURL: https://blog.enricochiolo.com
+languageCode: it
+title: Enrico Chiolo
+theme: PaperMod
+paginate: 5
+
+params:
+    mainSections:
+      - wip
+      - digital-analytics-note
+    ShowReadingTime: true
+    ShowToc: true
+    ShowBreadCrumbs: true
+    ShowPostNavLinks: true
+    ShowCodeCopyButtons: true
+    comments: true
+    ShowFullTextinRSS: true
+    ShareButtons: ["linkedin", "twitter"]
+    hideSummary: false
+    cover:
+        hidden: false # hide everywhere but not in structured data
+        hiddenInList: false # hide on list pages and home
+        hiddenInSingle: false # hide on single page
+    # defaultTheme: light
+    # defaultTheme: dark
+    defaultTheme: light # to switch between dark or light according to browser theme
+    homeInfoParams:
+        Title: Benvenuto 👋🏻
+        Content: Mi Chiamo Enrico Chiolo e sono un Digital Analyst, appassionato di CS e Dati
+    socialIcons:
+      - name: "Instagram"
+        url: "https://www.instagram.com/enricochiolo/"
+      - name: "Youtube"
+        url: "https://www.youtube.com/channel/UCq6tHtoUc66e0nF9Z61FALA"
+      - name: "Linkedin"
+        url: "https://www.linkedin.com/in/enricochiolo/"
+      - name: "Twitter"
+        url: "https://twitter.com/chiolo_enrico"
+    outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON # is necessary 
+    fuseOpts:
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 1000
+        threshold: 0.4
+        minMatchCharLength: 0
+        keys: ["title", "permalink", "summary", "content"]
+
 
 taxonomies:
   category: categories
   tag: tags
-  mood: moods
-  place: place
-  book: books
-  materia: materie
-
-enableRobotsTXT: true
-buildDrafts: false
-buildFuture: false
-buildExpired: false
-
-
-minify:
-  disableXML: true
-  minifyOutput: true
-
-params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "Enrico Chiolo 👾"
-  description: "Marketer / Digital Analyst / Coder"
-  keywords: [Blog, Enrico Chiolo, Coding, Digital Analytics, Digital Marketing]
-  author: "Enrico Chiolo"
-  # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: " 2, January 2006"
-  defaultTheme: light # dark, light
-  disableThemeToggle: false
-
-  ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
-  ShowWordCount: true
-  ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: true
-  tocopen: false
-  ShowFullTextinRSS: true
-
-  assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
-
-  label:
-    text: "Home"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
-
-  # profile-mode
-  profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: my image
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
-
-  # home-info mode
-  homeInfoParams:
-    Title: "Enrico Chiolo"
-    Content: Il mio blog personale
-
-  socialIcons:
-    - name: twitter
-      url: "https://twitter.com/chiolo_enrico"
-    - name: instagram
-      url: "https://www.instagram.com/enricochiolo/"
-    - name: github
-      url: "https://github.com/chioloenrico"
-    - name: site
-      url: "https://enricochiolo.com"
-    - name: youtube
-      url: "https://www.youtube.com/channel/UCq6tHtoUc66e0nF9Z61FALA"
-
-  analytics:
-    google:
-      SiteVerificationTag: "XYZabc"
-    bing:
-      SiteVerificationTag: "XYZabc"
-    yandex:
-      SiteVerificationTag: "XYZabc"
-
-  cover:
-    hidden: true # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
-
-  editPost:
-    URL: "https://github.com/<path_to_repo>/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
-
-  # for search
-  # https://fusejs.io/api/options.html
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    keys: ["title", "permalink", "summary", "content"]
-menu:
-  main:
-    - identifier: Home  
-      name: Home
-      url: /
-      weight: 1
-    - identifier: categories
-      name: Categorie
-      url: /categories/
-      weight: 2
-    - identifier: books
-      name: Libri
-      url: /books/
-      weight: 3
-    - identifier: tags
-      name: Tag
-      url: /tags/
-      weight: 3
-    - identifier: Cerca
-      name: Cerca
-      url: /search/
-      weight: 4
-    
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-pygmentsUseClasses: true
-markup:
-  highlight:
-    noClasses: false
-    # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
-    # lineNos: true
-    # style: monokai
-
-outputs:
-    home:
-        - HTML
-        - RSS
-        - JSON # is necessary

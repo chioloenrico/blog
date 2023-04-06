@@ -36,37 +36,12 @@
   {{- end }}
 
   <footer class="post-footer">
-    <!-- Inizio Categoria -->
-    <ul class="post-category">
-      {{- range ($.GetTerms "categories") }}
-      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-      {{- end }}
-    </ul>
-    <!-- Fine Categoria -->
-
-    <!-- Inizio Tag -->
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
-    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-    
-    <div class="post-meta-added">
-      <b>🌕 Mood:</b>
-      {{- range ($.GetTerms "moods") }}
-      {{ .LinkTitle }}
-      {{- end }}
-      <br><b>📍 Scrivo da:</b>
-      {{- range ($.GetTerms "place") }}
-      {{ .LinkTitle }} 
-      {{- end }}
-      {{- range ($.GetTerms "books") }}
-      <br><b>📖 Book:</b> <a href="{{ .Permalink }}" style="color: #F66666 ;">{{ .LinkTitle }}</a>
-      {{- end }}
-    </div>
-
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

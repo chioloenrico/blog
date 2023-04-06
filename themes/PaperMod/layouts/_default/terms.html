@@ -11,6 +11,8 @@
 </header>
 {{- end }}
 
+{{ .Content }}
+
 <ul class="terms-tags">
     {{- $type := .Type }}
     {{- range $key, $value := .Data.Terms.Alphabetical }}

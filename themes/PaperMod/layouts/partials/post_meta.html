@@ -8,34 +8,14 @@
 {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime))) }}
 {{- end }}
 
-
 {{- if (.Param "ShowWordCount") -}}
 {{- $scratch.Add "meta" (slice (i18n "words" .WordCount | default (printf "%d words" .WordCount))) }}
 {{- end }}
 
-{{- if ( .Params.place)}}
-{{- $scratch.Add "meta" (slice (i18n "Da" .ReadingTime | default (printf "Da %s"  .Params.place ))) }}
+{{- with (partial "author.html" .) }}
+{{- $scratch.Add "meta" (slice .) }}
 {{- end }}
-
 
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;·&nbsp;" -}}
 {{- end -}}
-
-<!-- Visualizzazione Attributi Aggiuntivi -->
-<div class="home-category">
-    {{ if $.GetTerms "categories" }}
-    {{ range ($.GetTerms "categories") }}
-    <b> ▶️ Categoria:</b> {{ .LinkTitle }}
-    {{ end }}
-    {{ end }}
-  
-    {{ if $.GetTerms "books" }}
-    {{ range ($.GetTerms "books") }}
-    <br><b> ▶️ Libro:</b> {{ .LinkTitle }}
-    {{ end }}
-    {{ end }}
-  </div>
-  
-
-
