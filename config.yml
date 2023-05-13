@@ -1,5 +1,6 @@
 baseURL: https://blog.enricochiolo.com
 languageCode: "it"
+defaultContentLanguage: "it"
 title: Enrico Chiolo
 theme: PaperMod
 paginate: 5
