@@ -1,6 +1,6 @@
 ---
 
-title: "Benvenuto GA4: Una lettura dal passato"
+title: "Benvenuto GA4: la presentazione di Google"
 summary: "Ho provato a rileggere l'articolo di presentazione di GA4 sul blog di Google dopo diverso tempo. Qui le mie considerazioni"
 cover:
     image: "appunti-digital-analytics.png"
@@ -12,8 +12,6 @@ tags:
     - "GA4"
 date: 2023-05-16
 ---
-
-# L’articolo di presentazione di GA4: letto oggi
 
 L'altro giorno mi sono cimentato in un esercizio interessante: ho deciso di rileggere l'articolo di introduzione di Google a GA4 a distanza di tempo. Ricordo di averlo letto con entusiasmo, ma senza soffermarmi troppo su ciò che effettivamente rappresentava per il mondo della Digital Analytics.
 
