@@ -13,8 +13,6 @@ tags:
 date: 2023-04-24
 ---
 
-L'intento 
-
 ## Che cos’è Looker Studio
 
 Data Studio è uno strumento di Data Visualization. Inglesismi a parte, significa che è uno strumento che possiamo utilizzare per visualizzare i nostri dati in modo organico.
