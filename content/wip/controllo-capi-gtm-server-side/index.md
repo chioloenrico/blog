@@ -9,6 +9,13 @@ cover:
     
 date: 2023-04-04T11:30:03+00:00
 
+categories:
+    - "Work in Public"
+
+tags:
+    - "GTM Server Side"
+    - "CAPI"
+    - "Tracking Meta"
 ---
 # Controllo CAPI con GTM Server Side
 

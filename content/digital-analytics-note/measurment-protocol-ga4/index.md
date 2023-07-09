@@ -86,7 +86,7 @@ Utilizzando un'estensione del browser che consente di visualizzare i cookie, è 
 Tuttavia, attenzione: il client_id è il valore numerico composto da 20 caratteri seguito dal punto "." e dalla porzione iniziale "GA1.1." È possibile recuperare il client_id dell'utente anche utilizzando la funzione gtag() con il metodo get, come descritto nella documentazione.
 
 ```js
-gtag('get', 'G-NW1BQ5DLJC', 'client_id', (clientID) => {   console.log("Questo è il client id:"+clientID)   });
+gtag('get', 'G-NW1BQ5DLJC', 'client_id', (clientID) => {  console.log("Questo è il client id:"+clientID)  });
 ```
  
 Nell’esempio sopra, il client_id viene recuperato tramite la funzione gtag(‘get’) e viene stampato nella console di Javascript. 

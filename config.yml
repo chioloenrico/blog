@@ -55,3 +55,14 @@ params:
 taxonomies:
   category: categories
   tag: tags
+
+menu:
+  main:
+  - identifier: categories
+    name: Categorie
+    url: /categories/
+    weight: 10
+  - identifier: newsletter
+    name: Newsletter
+    url: https://tinyletter.com/chioloenrico
+    weight: 30
