@@ -10,7 +10,12 @@ categories:
     - "Appunti Digital Analytics"
 tags:
     - "GA4"
+    - "Digital Analytics"
+    - "Web Analytics"
 date: 2023-05-16
+
+tool:
+    - "Google Analytics 4"
 
 ---
 

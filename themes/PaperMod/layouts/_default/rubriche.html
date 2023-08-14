@@ -11,18 +11,37 @@
 </header>
 {{- end }}
 
+<style>
+    .link-rubrica {
+        list-style: none;
+        padding: 7px;
+        border: 4px;
+        
+    }
+
+    .link-rubrica a{
+        background-color: #EC847A;
+        padding: 10px;
+        border-radius: 5px;
+        color: #362516;
+    }
+</style>
+
 <p>Benvenuto ☺️ </p>
 <br>
-<p>Qui sotto trovi tutte le ru</p>
+<p>Utilizzo i link qui sotto per navigare tra i contenuti delle rubriche:</p>
+<br>
 
-<ul class="terms-tags">
+
+
+<ul>
     {{- $type := .Type }}
     {{- range $key, $value := .Data.Terms.Alphabetical }}
     {{- $name := .Name }}
     {{- $count := .Count }}
     {{- with site.GetPage (printf "/%s/%s" $type $name) }}
-    <li>
-        <a href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
+    <li class="link-rubrica">
+        <a href="{{ .Permalink }}" >{{ .Name }} <sup><strong><sup>{{ $count }}</sup></strong></sup> </a>
     </li>
     {{- end }}
     {{- end }}
