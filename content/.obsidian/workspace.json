@@ -1,0 +1,165 @@
+{
+  "main": {
+    "id": "fdd21c4267bea4f1",
+    "type": "split",
+    "children": [
+      {
+        "id": "2ff2ab8a9401d584",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9f615733dded0aeb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "public-diary/Q3Review2023.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e64afb079d8a0e6e",
+    "type": "split",
+    "children": [
+      {
+        "id": "625423a70b7f7e62",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2f90346b7500bfe6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "9b00dd2c6ab66a8d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c9342c19a060076c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2a5a4801205fad81",
+    "type": "split",
+    "children": [
+      {
+        "id": "da54fb5c1706dbdb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d3bdcfba266ccf8e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "public-diary/Q3Review2023.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "41bed3e9b1c41ea9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "public-diary/Q3Review2023.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1f3cb65f4cc2cae0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "f4d40dbad4bafd3c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "public-diary/Q3Review2023.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false
+    }
+  },
+  "active": "9f615733dded0aeb",
+  "lastOpenFiles": [
+    "digital-analytics-note/benvenuto-ga4/index.md",
+    "digital-analytics-note/benvenuto-ga4/appunti-digital-analytics.png",
+    "public-diary/Q3Review2023.md",
+    "9-Luglio.md",
+    "public-diary",
+    "books/Develop in Swift/index.md",
+    "books/Develop in Swift",
+    "books/Senza nome",
+    "Senza nome",
+    "wip/iniettare-un-container-gtm/index.md",
+    "books",
+    "wip/iniettare-un-container-gtm/wip.png",
+    "wip/_index.md"
+  ]
+}

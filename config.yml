@@ -1,4 +1,4 @@
-baseURL: https://blog.enricochiolo.com
+baseURL: https://blog.enricochiolo.it
 languageCode: "it"
 defaultContentLanguage: "it"
 title: Enrico Chiolo
@@ -9,12 +9,12 @@ params:
     mainSections:
       - wip
       - digital-analytics-note
+      - 
     ShowReadingTime: true
     ShowToc: true
     ShowBreadCrumbs: true
     ShowPostNavLinks: true
     ShowCodeCopyButtons: true
-    comments: true
     ShowFullTextinRSS: true
     ShareButtons: ["linkedin", "twitter"]
     hideSummary: false
@@ -22,12 +22,10 @@ params:
         hidden: false # hide everywhere but not in structured data
         hiddenInList: false # hide on list pages and home
         hiddenInSingle: false # hide on single page
-    # defaultTheme: light
-    # defaultTheme: dark
     defaultTheme: light # to switch between dark or light according to browser theme
     homeInfoParams:
         Title: Benvenuto 👋🏻
-        Content: Mi Chiamo Enrico Chiolo e sono un Digital Analyst, appassionato di CS e Dati
+        Content: Digital Analyst / Marketer / Coding Lover
     socialIcons:
       - name: "Instagram"
         url: "https://www.instagram.com/enricochiolo/"
@@ -65,4 +63,8 @@ menu:
   - identifier: newsletter
     name: Newsletter
     url: https://tinyletter.com/chioloenrico
+    weight: 20
+  - identifier: tag
+    name: Tag
+    url: /tags/
     weight: 30

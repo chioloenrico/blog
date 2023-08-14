@@ -8,8 +8,8 @@
     --radius: 8px;
     --theme: rgb(255, 255, 255);
     --entry: rgb(255, 255, 255);
-    --primary: rgb(30, 30, 30);
-    --secondary: rgb(108, 108, 108);
+    --primary: #362417;
+    --secondary: #2A3D45;
     --tertiary: rgb(214, 214, 214);
     --content: rgb(31, 31, 31);
     --hljs-bg: rgb(28, 29, 33);

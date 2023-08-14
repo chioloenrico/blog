@@ -22,6 +22,7 @@ Per superare queste difficoltà, ho deciso di iniettare il mio container di GTM 
 La soluzione che ho trovato può essere utile in tutte quelle situazioni in cui non è possibile accedere al container installato sul sito web (per vari motivi). Vorrei quindi condividermi tutto il processo, in quanto penso possa essere istruttivo per tutti.
 
 Bene, se siete pronti, direi di cominciare. 
+
 ## Come funzione l’Inject del container
 Iniettare il container su un sito web non significa installare permanentemente un container alternativo. Il nostro container viene installato temporaneamente durante la sessione di navigazione con il nostro browser.
 

@@ -11,6 +11,7 @@ categories:
 tags:
     - "GA4"
 date: 2023-05-16
+
 ---
 
 L'altro giorno mi sono cimentato in un esercizio interessante: ho deciso di rileggere l'articolo di introduzione di Google a GA4 a distanza di tempo. Ricordo di averlo letto con entusiasmo, ma senza soffermarmi troppo su ciò che effettivamente rappresentava per il mondo della Digital Analytics.
